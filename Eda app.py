@@ -16,15 +16,14 @@ if uploaded_file:
     df = pd.read_csv(uploaded_file)
     st.success("✅ File uploaded successfully!")
 
-   # ---------------------- Missing Values ----------------------
-st.subheader("🩹 Missing Values Overview")
-missing_info = df.isnull().sum()
-st.write(missing_info[missing_info > 0])  # show only columns with missing values
+    # ---------------------- Missing Values ----------------------
+    st.subheader("🩹 Missing Values Overview")
+    missing_info = df.isnull().sum()
+    st.write(missing_info[missing_info > 0])  # show only columns with missing values
 
-# Fill missing values (simple imputation)
-df = df.fillna(df.median(numeric_only=True))
-
-st.success("✅ Missing values handled (numeric filled with median, categorical left unchanged).")
+    # Fill missing values (simple imputation)
+    df = df.fillna(df.median(numeric_only=True))
+    st.success("✅ Missing values handled (numeric filled with median, categorical unchanged).")
 
     # ---------------------- Dataset Overview ----------------------
     st.subheader("📄 Dataset Overview")
