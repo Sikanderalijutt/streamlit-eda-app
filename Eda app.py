@@ -16,18 +16,15 @@ if uploaded_file:
     df = pd.read_csv(uploaded_file)
     st.success("✅ File uploaded successfully!")
 
-    # ---------------------- Missing Values ----------------------
-    st.subheader("🩹 Missing Values Overview")
-    st.write("Count of missing values in each column:")
-    st.write(df.isnull().sum())
+   # ---------------------- Missing Values ----------------------
+st.subheader("🩹 Missing Values Overview")
+missing_info = df.isnull().sum()
+st.write(missing_info[missing_info > 0])  # show only columns with missing values
 
-    st.write("🔍 Heatmap of Missing Values:")
-    fig, ax = plt.subplots(figsize=(12, 4))
-    sns.heatmap(df.isnull(), cbar=False, cmap="coolwarm")
-    st.pyplot(fig)
+# Fill missing values (simple imputation)
+df = df.fillna(df.median(numeric_only=True))
 
-    # Fill missing values (optional simple imputation)
-    df = df.fillna(df.median(numeric_only=True))
+st.success("✅ Missing values handled (numeric filled with median, categorical left unchanged).")
 
     # ---------------------- Dataset Overview ----------------------
     st.subheader("📄 Dataset Overview")
